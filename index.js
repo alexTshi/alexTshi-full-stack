@@ -1,14 +1,14 @@
 const express = require("express")
-const app = express()
 const PORT = process.env.PORT || 3000
 const connectDB = require("./config/db")
 
+const app = express()
 //Connect Database
 connectDB()
 //Init Middleware
-app.use(express.json({extended: false}))
+app.use(express.json())
 
-app.get('/', (req, res) => res.send("API is running."))
+app.get('/', (req, res) => res.send("API is running.") )
 
 //Define Routes
 app.use("/api/users", require("./routes/api/users") )
