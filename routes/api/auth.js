@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auths = require('../../middleware/auth');
 const User = require('../../models/User');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 const config = require('config')
 const {
@@ -11,7 +12,7 @@ const {
 
 //@route    GET api/auth
 //@desc     TEST route
-//@access   Public
+//@access   Private
 
 router.get('/', auths, async (req, res, next) => {
     try{
@@ -61,30 +62,11 @@ router.post('/',
                         }]
                     })
             }
+            const  isMatch = await bcrypt.compare(password, user.password);
 
-            const avatar = normalize(
-                gravatar.url(email, {
-                    s: '200',
-                    r: 'pg',
-                    d: 'mm'
-                }), {
-                    forceHttps: true
-                }
-            )
-
-            user = new User({
-                name,
-                email,
-                avatar,
-                password
-            })
-
-            const salt = await bcrypt.genSalt(10);
-
-            user.password = await bcrypt.hash(password, salt);
-
-            await user.save();
-
+            if(!isMatch){
+                return res.status(400).json({ errors: [{msg:'Invalid Credentials'}]});
+            }
             const payload = {
                 user: {
                     id: user.id
