@@ -220,6 +220,9 @@ router.delete('/experience/:exp_id', auths, async (req, res) => {
          }
 });
 
+//@route    PUT api/profile/education
+//@desc     Update Profile Education
+//@access   Private
 router.put('/education', auths, [
     check('school', 'School is required').not().isEmpty(),
     check('degree', 'Degree is required').not().isEmpty(),
@@ -287,26 +290,6 @@ router.delete('/education/:edu_id', auths, async (req, res) => {
 //@route    GET api/profile/github/:username
 //@desc     GET Gitbug Profile
 //@access   Public
-// router.get('/github/:username', (req, res) => {
-//     try {
-//         const options = {
-//             uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort
-//             =created:asc&client_id=${config.get('githubClientId')}&client_secrets=${config.get('githubSecret')}`,
-//             method: 'GET',
-//             headers: { 'user-agent': 'node.js'}
-//         };
-//         request(options, (error, response, body) => {
-//             if(error) console.log(error);
-//             if(response.statusCode !== 200){
-//                 res.status(404).json({msg: 'No Github profile found!'});
-//             }
-//             res.json(json(body));
-//         });
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).json(err.message);
-//     }
-// });
 router.get('/github/:username', async (req, res) => {
     try {
       const uri = encodeURI(
