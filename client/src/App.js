@@ -4,11 +4,14 @@ import Landing from "./components/Layout/Landing";
 import Navbar from "./components/Layout/Navbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+//Redux 
+import {Provider} from 'react-redux';
+import store from './store'
 import "./App.css";
-
 function App() {
   return(
     <div>
+    <Provider store={store}>
       <Router>
         <Navbar />
         <Route exact path='/'> <Landing/> </Route>
@@ -19,6 +22,7 @@ function App() {
           </Switch>
         </section>
       </Router>
+      </Provider>
     </div>
   );
 }
