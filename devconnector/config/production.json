@@ -2,6 +2,6 @@
     "mongoURI": "mongodb+srv://lanke123:Izuku123@cluster0.bvfrw.mongodb.net/tests?retryWrites=true&w=majority",
     "jwtSecret": "mysecrettoken",
     "githubClientId": "505997742217e6662033",
-    "githubSecret": "c5afc00dc7936cec05b75c574072c501e45e1f9d",
-    "githubToken": "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"
+    "githubSecret": "ad60bd1fb0cf9ade2ef9f687cdb82b5339ab05b3",
+    "githubToken": "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"
 }
